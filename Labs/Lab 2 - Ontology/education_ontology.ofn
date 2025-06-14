@@ -1,0 +1,94 @@
+Prefix(:=<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5>
+
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Course>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Faculty>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Program>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Student>))
+Declaration(Class(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#hasCourses>))
+Declaration(ObjectProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#studies>))
+Declaration(DataProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country>))
+Declaration(DataProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn>))
+Declaration(DataProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#numberOfStudents>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#KnowledgeRepresentationAndSW>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin>))
+Declaration(NamedIndividual(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering>))
+
+############################
+#   Data Properties
+############################
+
+# Data Property: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country>)
+
+EquivalentDataProperties(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn>)
+
+# Data Property: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn>)
+
+FunctionalDataProperty(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn>)
+DataPropertyDomain(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University>)
+
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer>)
+
+SubClassOf(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition>)
+
+# Class: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor>)
+
+SubClassOf(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition>)
+
+# Class: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher>)
+
+SubClassOf(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition>)
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science>)
+
+ClassAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Program> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science>)
+ObjectPropertyAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University>)
+
+# Individual: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science>)
+
+ClassAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Course> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science>)
+ObjectPropertyAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science>)
+
+# Individual: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University>)
+
+ClassAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University>)
+DataPropertyAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University> "Sweden")
+
+# Individual: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin>)
+
+ClassAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Student> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin>)
+
+# Individual: <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering> (<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering>)
+
+ClassAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Faculty> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering>)
+ObjectPropertyAssertion(<http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering> <http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University>)
+
+
+)

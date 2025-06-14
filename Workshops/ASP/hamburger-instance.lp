@@ -1,0 +1,22 @@
+% instance 
+depots(3).
+restaurant(r1, 10).
+restaurant(r2, 15).
+restaurant(r3, 20).
+restaurant(r4, 100).
+restaurant(r5, 150).
+restaurant(r6, 200).
+restaurant(r7, 200).
+restaurant(r8, 300).
+restaurant(r9, 325).
+restaurant(r10, 400).
+restaurant(r11, 450).
+restaurant(r12, 600).
+restaurant(r13, 650).
+restaurant(r14, 700).
+restaurant(r15, 750).
+restaurant(r16, 800).
+restaurant(r17, 850).
+restaurant(r18, 850).
+restaurant(r19, 950).
+restaurant(r20, 980).

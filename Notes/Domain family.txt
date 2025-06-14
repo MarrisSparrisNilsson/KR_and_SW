@@ -1,0 +1,22 @@
+Domain: family
+
+Linda is a girl
+Linda is the daugther of Jonas
+Jonas has two cusins
+Maria's dad is Jonas brother
+Peter and Maria is married
+
+Who are Jonas's siblings?
+Who is married to _?
+How many Children does _ have?
+Who is the youngest child of
+
+YOU MAY ASK ANY RELEVANT QUESTION ABOUT THE FAMILY OR PEOPLE RELATIONSHIP ONTOLOGY
+
+Terms:
+wife
+husband
+father
+mother
+grandparent
+grandchild

@@ -1,0 +1,194 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### Query a local RDF dataset on Music\n\nPut this file and the unzipped *music.ttl* file in a same folder. \n\nConfigure a local endpoint by right-clicking on the *music.ttl* file and selecting *SPARQL Notebook: Use File as Store*. ",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "#### Triple Patterns\nThe basic building block for SPARQL queries is triple patterns. A triple pattern is just like an RDF graph triple, but you can use a variable in any one of the three positions. We use triple patterns to find the matching triples in a graph and variables act like wildcards that match any node. \n\nFor example, in the query below, we see a simple SELECT query with a single triple pattern: ?album rdf:type :Album.\n\nExecute the query in Code cell using the **Run**  icon to the left of the cell and the output will appear directly below the code cell. \n- You can also use keyboard shortcuts to run code cell. To run the current cell, use **Ctrl+Enter**. \n- You can choose the renderer for the query results. Click the 3 dots (**...**) icon to the left of the output and select **Change Presentation**. There are two presentation options: table and json format. ",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\nprefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \r\n\r\nSELECT ?album\r\nWHERE {\r\n   ?album rdf:type :Album .\r\n} \r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "#### Basic Graph Patterns\nWhen one or more triple patterns are used together, they form what is known as a Basic Graph Pattern. Let’s add one more triple pattern to our previous query to retrieve the artist for each album. The second triple pattern in this query will match the triples with :artist predicate, and we will get two columns if the query result is presented in table.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT *\r\n{\r\n   ?album a :Album .\r\n   ?album :artist ?artist .\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "#### Understand more complex SPARQL queries\r\nUnderstand the queries below and execute them to test your undersanding. Explain the queries in text:\r\n\r\n- For each query:\r\n  1. Add a Markdown cell below the Code cell.\r\n  2. Write down the text to explain the query in the cell. \r\n\r\nTo add a new cell below the currently selected cell, use the **plus icon** in the main toolbar or a **cell's hover toolbar**.\r\n\r\nTo render Markdown cells, you can select the check mark in the cell toolbar, or use the keyboard shortcuts **Ctrl+Enter**.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT *\r\n{\r\n   ?album a :Album .\r\n   ?album :artist ?artist .\r\n   ?artist a :SoloArtist .\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 albums made by solo artists.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT *\r\n{\r\n   ?album a :Album ;\r\n          :artist ?artist ;\r\n          :date ?date\r\n}\r\nORDER BY desc(?date)\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List the 10 most recent albums and their artists with it's corresponding date.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\nprefix xsd: <http://www.w3.org/2001/XMLSchema#>\r\n\r\nSELECT *\r\n{\r\n   ?album a :Album ;\r\n          :artist ?artist ;\r\n          :date ?date\r\n   FILTER (?date >= \"1970-01-01\"^^xsd:date)\r\n}\r\nORDER BY ?date\r\nLIMIT 10\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 albums and their artist from January 1st, 1970 or later in ascending order.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT *\r\n{\r\n   ?album a :Album ;\r\n          :artist ?artist ;\r\n          :date ?date\r\n      FILTER (year(?date) >= 1970)\r\n}\r\nORDER BY ?date\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 albums and artist from 1970 and dates in ascending order",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT (count(?album) as ?count)\r\n{\r\n    ?album a :Album\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Get the number of albums that exist in the database and display it in the \"count\" column of the table.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT ?predicate (COUNT(?predicate) as ?predicateCount)\r\n{\r\n    ?subject ?predicate ?object .\r\n}\r\nGROUP BY ?predicate\r\nORDER BY DESC(?predicateCount)",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List the different types of relation predicates and the number of occurrences for each predicate that exist in the database.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT ?name\r\n{\r\n    { ?artist a :SoloArtist }\r\n    UNION\r\n    { ?artist a :Band }\r\n    ?artist :name ?name\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 names of either solo artists or bands.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT ?year (count(distinct ?album) AS ?count)\r\n{\r\n    ?album a :Album ;\r\n            :date ?date ;\r\n    BIND (year(?date) AS ?year)\r\n}\r\nGROUP BY ?year\r\nORDER BY desc(?count)\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List top 10 years with the most number of released albums in descending order.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT ?song ?length \r\n{\r\n    ?song a :Song .\r\n    OPTIONAL {\r\n        ?song :length ?length .\r\n    }\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 songs together with the song length if it is included in the database.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nSELECT ?song \r\n{\r\n    ?song a :Song .\r\n    FILTER NOT EXISTS {\r\n        ?song :length ?length .\r\n    }\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 songs where the song length does not exist in the database.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nselect distinct ?artist ?cowriter\r\n{\r\n    ?song :writer ?artist .\r\n    ?song :writer ?cowriter\r\n    FILTER (?artist != ?cowriter)\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 unique combination instances where an artist have had help to write a song from a co-writer (filtering out self-inclusion). It finds the connection from the song to the artist.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nselect distinct ?artist ?cowriter\r\n{\r\n    ?artist ^:writer ?song .\r\n    ?song :writer ?cowriter\r\n    FILTER (?artist != ?cowriter)\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "It produces the same result as the last query but instead **traverses the graph backwards** using the `^` operator, starting from the artist and connects the artist to a song via the `:writer` predicate.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://stardog.com/tutorial/>\r\n\r\nselect ?song \r\n{\r\n  ?song (^:track/:artist/:member?)|:writer :Paul_McCartney\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "List 10 songs, matching the `^:track` (through KG backtracking), `:artist` and optional `:member` predicates. The query displays results when Paul McCartney is either involved as an artist or as a member in a band for a given song's release, otherwise display the songs where he is the writer of the song.",
+    "metadata": {}
+  }
+]

@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5/"
+     xml:base="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-5="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#belongsTo"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#hasCourses -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#hasCourses"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#studies -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#studies"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#country">
+        <owl:equivalentProperty rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#locatedIn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#numberOfStudents -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#numberOfStudents"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Course -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Course"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Faculty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Faculty"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Lecturer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Professor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Program -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Program"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Researcher">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#AcademicPosition"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Student -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Student"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science">
+        <rdf:type rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Program"/>
+        <untitled-ontology-5:belongsTo rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Data_Science">
+        <rdf:type rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Course"/>
+        <untitled-ontology-5:belongsTo rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Computer_Science"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University">
+        <rdf:type rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#University"/>
+        <untitled-ontology-5:locatedIn>Sweden</untitled-ontology-5:locatedIn>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#KnowledgeRepresentationAndSW -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#KnowledgeRepresentationAndSW"/>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Martin">
+        <rdf:type rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Student"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#SchoolOFEngineering">
+        <rdf:type rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Faculty"/>
+        <untitled-ontology-5:belongsTo rdf:resource="http://www.semanticweb.org/martin/ontologies/2024/10/untitled-ontology-5#Jönköping_University"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

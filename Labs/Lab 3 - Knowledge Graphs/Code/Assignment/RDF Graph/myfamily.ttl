@@ -1,0 +1,76 @@
+@prefix : <http://example.com/rdf/family#> .
+@prefix fm: <http://example.com/owl/families/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:anita a fm:Person ;
+    fm:Parent :agneta,
+        :dan,
+        :mats ;
+    fm:age "87"^^xsd:nonNegativeInteger .
+
+:ingvar a fm:Person ;
+    fm:Parent :hakan,
+        :stefan ;
+    fm:age "87"^^xsd:nonNegativeInteger .
+
+:sten a fm:Pet ;
+    fm:age "14"^^xsd:nonNegativeInteger .
+
+:emelie a fm:Person ;
+    fm:age "24"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :hampus .
+
+:hampus a fm:Person ;
+    fm:age "25"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :emelie .
+
+:jacob a fm:Person ;
+    fm:age "29"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :sofia .
+
+:sofia a fm:Person ;
+    fm:age "31"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :jacob .
+
+:stefan a fm:Person ;
+    fm:age "56"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :hakan .
+
+:dan a fm:Person ;
+    fm:Parent :emelie,
+        :hampus ;
+    fm:age "54"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :agneta,
+        :mats .
+
+:hakan a fm:Person ;
+    fm:Parent :martin,
+        :per ;
+    fm:age "59"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :stefan ;
+    fm:hasSpouse :agneta .
+
+:martin a fm:Person ;
+    fm:age "24"^^xsd:nonNegativeInteger ;
+    fm:hasPet :sten ;
+    fm:hasSibling :per .
+
+:mats a fm:Person ;
+    fm:Parent :jacob,
+        :sofia ;
+    fm:age "62"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :agneta,
+        :dan .
+
+:per a fm:Person ;
+    fm:age "22"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :martin .
+
+:agneta a fm:Person ;
+    fm:Parent :martin,
+        :per ;
+    fm:age "59"^^xsd:nonNegativeInteger ;
+    fm:hasSibling :dan,
+        :mats ;
+    fm:hasSpouse :hakan .
+

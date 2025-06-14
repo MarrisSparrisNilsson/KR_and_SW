@@ -1,0 +1,9 @@
+@prefix : <http://example.org/>  .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix fm: <http://example.com/owl/families/> .
+
+:john rdf:type fm:Person .
+:mary rdf:type fm:Person .
+:sophie rdf:type fm:Person .
+:john fm:Parent :mary .
+:mary fm:Parent :sophie .

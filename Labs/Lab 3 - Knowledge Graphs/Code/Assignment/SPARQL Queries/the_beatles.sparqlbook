@@ -1,0 +1,74 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "# Sparql Queries | The Beatles\r\n\r\nFind notebook setup tutorial here: [SPARQL Notebook](https://marketplace.visualstudio.com/items?itemName=Zazuko.sparql-notebook)",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# from SPARQLWrapper import JSON, SPARQLWrapper\r\nPREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## 2.2 \r\n\r\n### 1) List the people who influenced The Beatles.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# Prefixes are needed for every new cell apparently...\r\nPREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT DISTINCT ?person (?label AS ?Beatles_influencedBy)\r\nWHERE {\r\n    yago:The_Beatles schema:influencedBy ?person .\r\n    ?person rdfs:label ?label .\r\n    FILTER (lang(?label) = \"en\")\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### 2) List the people influenced by The Beatles, either directly or indirectly (through a chain of influence), and show their nationality if available in the dataset.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT DISTINCT ?name ?nationality\r\nWHERE {\r\n    ?person schema:influencedBy yago:The_Beatles.\r\n    ?person rdfs:label ?name .\r\n    ?person schema:nationality ?from.\r\n    ?from rdfs:label ?nationality.\r\n    FILTER (lang(?name) = \"en\")\r\n    FILTER (lang(?nationality) = \"en\")\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### 3) List the movies from 1960 to 1970 directed by people who have won the same award as The Beatles.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT ?movie ?director (SAMPLE(?award2) AS ?award) (SAMPLE(year(?date)) AS ?year)\r\nWHERE {\r\n    yago:The_Beatles schema:award ?award1 .\r\n    ?award1 rdfs:label ?award2 .\r\n\r\n    ?movie1 rdf:type schema:Movie .\r\n    ?movie1 rdfs:label ?movie .\r\n    ?movie1 schema:director ?director1 .\r\n    ?director1 rdfs:label ?director .\r\n\r\n    ?director1 schema:award ?dir_award .\r\n\r\n    ?movie1 schema:dateCreated ?date .\r\n\r\n    FILTER (lang(?director) = \"en\")\r\n    FILTER (lang(?movie) = \"en\")\r\n    FILTER (lang(?award2) = \"en\")\r\n    FILTER (?award1 = ?dir_award)\r\n    FILTER (year(?date) >= 1960 && year(?date) <= 1970)\r\n}\r\nGROUP BY ?movie ?director\r\nORDER BY ?year",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### 4) List the people who have been members of The Beatles and their family members.\r\n\r\nTip: use navigational graph patterns to find all the family members.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT DISTINCT ?member ?name\r\nWHERE {\r\n    # Get members of The Beatles by schema:memberOf relation (incoming property)\r\n    ?member schema:memberOf yago:The_Beatles.\r\n    ?member rdfs:label ?name.\r\n\r\n    FILTER (lang(?name) = \"en\")\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX schema: <http://schema.org/>\r\nPREFIX yago: <http://yago-knowledge.org/resource/>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT DISTINCT ?member ?name ?gender\r\n                (GROUP_CONCAT(DISTINCT ?spouseName; separator=\", \") AS ?spouses)\r\n                (GROUP_CONCAT(DISTINCT ?parentName; separator=\", \") AS ?parents)\r\n                (GROUP_CONCAT(DISTINCT ?siblingName; separator=\", \") AS ?siblings)\r\n                (GROUP_CONCAT(DISTINCT ?childName; separator=\", \") AS ?children)\r\n                (GROUP_CONCAT(DISTINCT ?grandChildName; separator=\", \") AS ?grandChildren)\r\nWHERE {\r\n    ?member schema:memberOf yago:The_Beatles.\r\n    ?member rdfs:label ?name .\r\n    ?member schema:gender ?genderResource .\r\n    ?genderResource rdfs:label ?gender .\r\n\r\n\r\n    OPTIONAL {\r\n        ?member schema:spouse ?spouse .\r\n        ?spouse rdfs:label ?spouseName .\r\n        FILTER (lang(?spouseName) = \"en\")\r\n    }\r\n\r\n    OPTIONAL {\r\n        ?parent ^schema:children ?member .\r\n        ?parent schema:children ?sibling .\r\n\r\n        FILTER (?sibling != ?member)\r\n\r\n        ?sibling rdfs:label ?siblingName .\r\n        ?parent rdfs:label ?parentName .\r\n        FILTER (lang(?siblingName) = \"en\")\r\n        FILTER (lang(?parentName) = \"en\")\r\n    }\r\n    \r\n    OPTIONAL {\r\n        ?member schema:children ?child .\r\n        ?child rdfs:label ?childName .\r\n        FILTER (lang(?childName) = \"en\")\r\n    }\r\n\r\n    OPTIONAL {\r\n        ?member schema:children ?child .\r\n        ?child schema:children ?grandChild .\r\n        ?grandChild rdfs:label ?grandChildName .\r\n        FILTER (lang(?grandChildName) = \"en\")\r\n    }\r\n\r\n\r\n    FILTER (lang(?gender) = \"en\")\r\n    FILTER (lang(?name) = \"en\")\r\n}\r\nGROUP BY ?member ?name ?gender\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "The YAGO database does not seem to have a `schema:sibling` property or a `^schema:children` (backwards relationship) to neither of The Beatle's members, which makes it impossible to get any parents which ultimately makes us unable to draw connection to any potential sibling related to the members.\r\n\r\nThe YAGO database does not seem to have any data about The Beatle's members grandchildren.",
+    "metadata": {}
+  }
+]
