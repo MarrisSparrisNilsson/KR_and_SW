@@ -1,66 +1,78 @@
-time(0..10)
+% Time
+time(0..10).
 
-husband(m1).
-husband(m2).
-husband(m3).
-wife(w1).
-wife(w2).
-wife(w3).
+% Persons
+man(m1; m2; m3).
+woman(w1; w2; w3).
+person(X) :- woman(X).
+person(X) :- man(X).
 
-% Married Couples
-marriedTo(m1,w1).
-marriedTo(m2,w2).
-marriedTo(m3,w3).
+% Married persons
+married(w1, m1).
+married(w2, m2).
+married(w3, m3).
+married(m1, w1).
+married(m2, w2).
+married(m3, w3).
+married(X, Y) :- married(Y, X).
 
-% Sides
-% opposite(left, right).
-% opposite(right, left).
+% Start position
+at_bank(left, boat, 0).
+at_bank(left, w1, 0).
+at_bank(left, w2, 0).
+at_bank(left, w3, 0).
+at_bank(left, m1, 0).
+at_bank(left, m2, 0).
+at_bank(left, m3, 0).
 
-% Start
-at_bank(left,boat,0).
-at_bank(left,m1,0).
-at_bank(left,m2,0).
-at_bank(left,m3,0).
-at_bank(left,w1,0).
-at_bank(left,w2,0).
-at_bank(left,w3,0).
+river_sides(left, right).
+river_sides(right, left).
 
-% Goal
-all_has_passed :-   at_bank(right,boat,10),
-                    at_bank(right,m1,10),
-                    at_bank(right,m2,10),
-                    at_bank(right,m3,10),
-                    at_bank(right,w1,10),
-                    at_bank(right,w2,10),
-                    at_bank(right,w3,10),
+% A person is on a location at step T+1,
+% if it was there at step T and we do not have
+% evidence that it is not there at T+1
+at_bank(B, X, T+1) :- 
+    at_bank(B, X, T),
+    time(T),
+    not -at_bank(B, X, T+1).
 
-:- not all_has_passed.
 
-% Max travelers
-1 <= { cross(P1, T), cross(P2, T): P1 != P2 } <= 2 :- time(T)
-% 1 <= { cross(P, T):  } <= 2 :- time(T)
+% Crossing rules
+at_bank(B2, P, T+1) :- cross(P, T), at_bank(B, P, T), river_sides(B, B2), time(T).
+-at_bank(B,P,T+1) :- cross(P,T), at_bank(B,P,T), river_sides(B, B2), time(T).
 
-% Inertia (Object in motion)
-% An object has passed to the opposite side if it was at the starting side 
-has_passed(B,S,T+1) :- has_passed(B,S,T), time(T), not -has_passed(B,S,T+1).
 
-move(P, T) :- {at_bank()}
 
-% Effect of one or two people crossing
-cross(P, T+1) :- {at_bank(Start,P,T), at_bank(End,P,T+1): Start != End}
+% Rule, only 2 persons can cross the river at the same time. 
+{ cross(P, T) : at_bank(B, P, T) } <= 3 :- time(T), at_bank(B, boat, T).
+:- cross(P, T), person(P), not cross(boat, T).
+:- cross(boat,T), not 1 { cross(P,T) : person(P) }.
 
-% Two people cannot cross
-% :- {cross(P1, T), cross(P2, T): marriedTo(P1,P2); marriedTo(P2,P1)}
 
-% One example of a crossing plan to get everyone across the river
-cross(w3,0) cross(w1,0)
-cross(w1,1)
-cross(w2,2) cross(w1,2)
-cross(w1,3)
-cross(m3,4) cross(m2,4)
-cross(m2,5) cross(w2,5)
-cross(m2,6) cross(m1,6)
-cross(w3,7)
-cross(w2,8) cross(w1,8)
-cross(m3,9)
-cross(w3,10) cross(m3,10)
+% Because of the jealous husband dilemma, a woman cannot be on the same side of the river with other men unless her husband is present.
+:- at_bank(B, W, T), 
+    at_bank(B, M, T),
+    woman(W),
+    man(M),
+    not married(W, M),
+    not at_bank(B, H, T) : married(H, W).
+
+% Remove the possibility of women crossing if she is not traveling with her husband.
+:- cross(M, T), cross(W, T), man(M), woman(W), not married(W, M).
+
+
+% Goal state (everyone has crossed)
+goal_reached :- 
+    time(T),
+    at_bank(right, w1, T+1),
+    at_bank(right, w2, T+1),
+    at_bank(right, w3, T+1),
+    at_bank(right, m1, T+1),
+    at_bank(right, m2, T+1),
+    at_bank(right, m3, T+1).
+
+
+:- not goal_reached.
+
+
+#show cross/2.
